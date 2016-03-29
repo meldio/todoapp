@@ -1,0 +1,51 @@
+type User implements Node @rootViewer(field: "viewer") {
+  id: ID!
+  firstName: String
+  lastName: String
+  emails: [String]!
+  profilePictureUrl: String
+  todos: NodeConnection(Todo, assignees)
+}
+
+type Todo implements Node {
+  id: ID!
+  text: String
+  complete: Boolean
+  assignees: NodeConnection(User, todos)
+}
+
+filter on NodeConnection(Todo) {
+  ACTIVE: { node: { complete: { eq: false } } }
+  COMPLETED: { node: { complete: { eq: true } } }
+  STATUS: (complete: Boolean) { node: { complete: { eq: $complete } } }
+  ALL: { }
+}
+
+mutation addTodo(text: String!) {
+  todoEdge: Edge(Todo)
+  viewer: User
+}
+
+mutation changeTodoStatus(id: ID!, complete: Boolean!) {
+  todo: Todo
+  viewer: User
+}
+
+mutation markAllTodos(complete: Boolean!) {
+  changedTodos: [Todo]
+  viewer: User
+}
+
+mutation removeCompletedTodos {
+  deletedTodoIds: [ID]
+  viewer: User
+}
+
+mutation removeTodo(id: ID!) {
+  deletedTodoId: ID
+  viewer: User
+}
+
+mutation renameTodo(id: ID!, text: String!) {
+  todo: Todo
+}

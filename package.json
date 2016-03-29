@@ -1,0 +1,74 @@
+{
+  "name": "todo",
+  "version": "0.1.0",
+  "description": "Meldio demo Todo app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meldio/todoapp.git"
+  },
+  "license": "MIT",
+  "config": {
+    "meldio": {
+      "dbConnectionUri": "mongodb://localhost:27017/todo",
+      "protocol": "http",
+      "host": "localhost",
+      "port": "9000",
+      "enabledAuth": [
+        "facebook",
+        "google",
+        "github"
+      ],
+      "sessionDurationUnit": "days",
+      "sessionDuration": "2",
+      "scopes": {
+        "facebook": [
+          "public_profile",
+          "email"
+        ],
+        "google": [
+          "https://www.googleapis.com/auth/userinfo.profile",
+          "https://www.googleapis.com/auth/userinfo.email"
+        ],
+        "github": [
+          "user:email"
+        ]
+      },
+      "root": "server",
+      "schema": "schema.sdl",
+      "permissions": "permissions.js",
+      "mutations": "mutations",
+      "hooks": "hooks",
+      "build": ".build"
+    }
+  },
+  "scripts": {
+    "start": "babel-node ./scripts/start.js",
+    "refresh": "babel-node ./scripts/refresh.js"
+  },
+  "dependencies": {
+    "babel": "5.8.23",
+    "babel-core": "^5.8.25",
+    "babel-loader": "5.3.2",
+    "babel-relay-plugin": "^0.7.1",
+    "classnames": "^2.1.5",
+    "express": "^4.13.3",
+    "history": "^1.17.0",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-relay": "^0.7.1",
+    "react-router": "^1.0.0",
+    "meldio-client": "^0.4.5",
+    "react-router-relay": "^0.8.0",
+    "todomvc-app-css": "^2.0.3",
+    "todomvc-common": "^1.0.2",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^4.1.7",
+    "eslint": "^1.10.1",
+    "eslint-plugin-babel": "^2.1.1",
+    "eslint-plugin-react": "^2.3.0",
+    "graphql": "^0.4.13"
+  }
+}
